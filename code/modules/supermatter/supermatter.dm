@@ -261,6 +261,8 @@
 	//adjusted range so that a power of 170 (pretty high) results in 9 tiles, roughly the distance from the core to the engine monitoring room.
 	//note that the rads given at the maximum range is a constant 0.2 - as power increases the maximum range merely increases.
 	for(var/mob/living/l in range(src, round(sqrt(power / 2))))
+		var/radhardness = radhardness_to(l)
+		l << "<span class='notice'>Current radhardness: [radhardness]</span>"
 		var/radius = max(get_dist(l, src), 1)
 		var/rads = (power / 10) * ( 1 / (radius**2) )
 		l.apply_effect(rads, IRRADIATE, blocked = l.getarmor(null, "rad"))
@@ -269,6 +271,22 @@
 
 	return 1
 
+/obj/machinery/power/supermatter/proc/radhardness_to(var/target)
+	var/radhardness = 1
+	for(var/turf/enroute in getline(src, target))
+		if(istype(enroute, /turf/simulated/wall))
+			var/turf/simulated/wall/T = enroute
+			if(T.material && T.material.opacity > 0.5)
+				radhardness++ // any solid wall is somewhat rad-hard
+			if(T.reinf_material && T.reinf_material.opacity > 0.5)
+				radhardness++ // reinforced ones are even rad-harder
+		for(var/obj/machinery/door/airlock/A in enroute)
+			if(A.density && A.opacity > 0.5)
+				radhardness++ // closed airlocks are rad-hard
+		for(var/obj/machinery/door/blast/B in enroute)
+			if(B.density)
+				radhardness+=2 // closed blastdoors are very rad-hard
+	return radhardness
 
 /obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/Proj)
 	var/turf/L = loc
