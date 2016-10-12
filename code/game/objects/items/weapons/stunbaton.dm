@@ -74,6 +74,9 @@
 			update_icon()
 		else
 			to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
+	else if(istype(W, /obj/item/weapon/cell))
+		if(!bcell)
+			to_chat(user, "<span class='warning'>\The [W.name] is too big to fit inside the [src]. You'll need a device cell.</span>")
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		if(bcell)
 			bcell.update_icon()
