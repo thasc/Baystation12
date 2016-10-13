@@ -288,6 +288,11 @@
 		msg += wound_flavor_text[limb]
 	msg += "</span>"
 
+	if(!skipeyes && species.vision_organ)
+		var/obj/item/organ/internal/VO = internal_organs_by_name[species.vision_organ]
+		if(!VO || !istype(VO) || (VO.status & ORGAN_CUT_AWAY))
+			msg += "<span class='danger'>[T.He] is missing [T.his] [species.vision_organ].</span>\n"
+
 	for(var/implant in get_visible_implants(0))
 		msg += "<span class='danger'>[src] [T.has] \a [implant] sticking out of [T.his] flesh!</span>\n"
 	if(digitalcamo)
