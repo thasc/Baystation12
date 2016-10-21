@@ -77,9 +77,9 @@ var/list/prisonwarped       = list() // List of players already warped.
 var/list/ninjastart         = list()
 
 var/list/cardinal     = list(NORTH, SOUTH, EAST, WEST)
-var/list/cardinal_z   = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
+var/list/cardinal_z   = cardinal + list(UP, DOWN)
 var/list/cornerdirs   = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
-var/list/cornerdirs_z = list((NORTH|UP), (SOUTH|UP), (EAST|UP), (WEST|UP), (NORTH|DOWN), (SOUTH|DOWN), (EAST|DOWN), (WEST|DOWN)) + cornerdirs
+var/list/cornerdirs_z = cornerdirs + list((NORTH|UP), (SOUTH|UP), (EAST|UP), (WEST|UP), (NORTH|DOWN), (SOUTH|DOWN), (EAST|DOWN), (WEST|DOWN))
 var/list/alldirs      = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
 var/list/reverse_dir  = list( // reverse_dir[dir] = reverse of dir
 	 2,  1,  3,  8, 10,  9, 11,  4,  6,  5,  7, 12, 14, 13, 15, 32, 34, 33, 35, 40, 42,
