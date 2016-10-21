@@ -54,9 +54,9 @@
 /turf/simulated/proc/can_safely_remove_from_zone()
 
 	#ifdef ZLEVELS
-	var/corners = cornerdirs_z
+	var/neighbor_corners = cornerdirs_z
 	#else
-	var/corners = cornerdirs
+	var/neighbor_corners = cornerdirs
 	#endif
 
 	if(!zone) return 1
@@ -64,7 +64,7 @@
 	var/check_dirs = get_zone_neighbours(src)
 	var/unconnected_dirs = check_dirs
 
-	for(var/dir in corners)
+	for(var/dir in neighbor_corners)
 		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
 		if((dir & check_dirs) == dir)
 			//check that they are connected by the corner turf
@@ -79,14 +79,14 @@
 /turf/simulated/proc/get_zone_neighbours(turf/simulated/T)
 
 	#ifdef ZLEVELS
-	var/cardies = cardinal_z
+	var/neighbor_dirs = cardinal_z
 	#else
-	var/cardies = cardinal
+	var/neighbor_dirs = cardinal
 	#endif
 
 	. = 0
 	if(istype(T) && T.zone)
-		for(var/dir in cardies)
+		for(var/dir in neighbor_dirs)
 			var/turf/simulated/other = get_step(T, dir)
 			if(istype(other) && other.zone == T.zone && !(other.c_airblock(T) & AIR_BLOCKED) && get_dist(src, other) <= 1)
 				. |= dir
