@@ -103,6 +103,12 @@ datum/skill/pilot
     desc = "Describes your experience and understanding of operating heavy machinery, which includes mechs and other large exosuits. Used in piloting mechs."
     field = "Engineering"
 
+datum/skill/astronav
+    ID = "astronav"
+    name = "Astro-Navigation"
+    desc = "Describes your experience of piloting and navigating spacecraft more sophisticated than automated shuttlepods. A low level of this skill allows you to pilot mid-size auxiliary ships. A high level of this skill qualifies you to helm faster-than-light deep space cruisers."
+    secondary = 1
+
 datum/skill/medical
     ID = "medical"
     name = "Medicine"
