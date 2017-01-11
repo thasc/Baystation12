@@ -143,7 +143,7 @@
 	if (HasAbove(some_dest_turf.z))
 		for (var/turf/TD in dstturfs)
 			var/turf/TA = GetAbove(TD)
-			if (TA && istype(TA, get_base_turf_by_area(TA)))
+			if (TA && (istype(TA, /turf/simulated/open) || istype(TA, /turf/space)) )
 				TA.ChangeTurf(ceiling_type, 1, 1)
 
 	origin.move_contents_to(destination, direction=direction)
@@ -154,7 +154,7 @@
 		for (var/turf/TO in origin)
 			var/turf/TA = GetAbove(TO)
 			if (TA && istype(TA, ceiling_type))
-				TA.ChangeTurf(get_base_turf_by_area(TA), 1, 1)
+				TA.ChangeTurf(/turf/simulated/open, 1, 1)
 
 	for(var/mob/M in destination)
 		if(M.client)
