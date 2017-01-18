@@ -130,6 +130,7 @@
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
 	visible_message("<span class='danger'>\The [src] spontaneously combusts!.</span>") //!!OH SHIT!!
+	playsound(src, 'sound/effects/fireignite.ogg', 100, 1)
 	return
 
 /turf/simulated/wall/proc/take_damage(dam)
@@ -234,6 +235,7 @@
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
 	to_chat(user, "<span class='warning'>The thermite starts melting through the wall.</span>")
+	playsound(src, 'sound/effects/fireignite.ogg', 100, 1)
 
 	spawn(100)
 		if(O)
