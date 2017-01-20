@@ -84,10 +84,6 @@
 	name = "Auxiliary Tool Storage"
 	icon_state = "auxstorage"
 
-/area/storage/backup
-	name = "Tertiary Tool Storage"
-	icon_state = "auxstorage"
-
 // Holodecks
 
 /area/holodeck

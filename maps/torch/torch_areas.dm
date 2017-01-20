@@ -1106,6 +1106,10 @@
 	name = "Starboard Auxillary Storage"
 	icon_state = "auxstorage"
 
+/area/storage/backup
+	name = "Tertiary Tool Storage"
+	icon_state = "auxstorage"
+
 /area/storage/cargo
 	name = "Cargo Storage"
 	icon_state = "quartstorage"
