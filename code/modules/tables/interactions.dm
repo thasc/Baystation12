@@ -108,9 +108,11 @@
 							                  "<span class='danger'>\The [S] slices into your face!</span>")
 							M.standard_weapon_hit_effects(S, G.assailant, S.force*2, blocked, BP_HEAD) //standard weapon hit effects include damage and embedding
 				else
-					G.affecting.forceMove(src.loc)
-					G.affecting.Weaken(rand(2,5))
-					visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
+					visible_message("<span class='danger'>[G.assailant] starts putting [G.affecting] on \the [src]!</span>")
+					if (do_mob(G.assailant, G.affecting, 20))
+						G.affecting.forceMove(src.loc)
+						G.affecting.Weaken(rand(2,5))
+						visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
 				qdel(W)
 			return
 
