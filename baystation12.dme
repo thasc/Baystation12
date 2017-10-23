@@ -1499,8 +1499,6 @@
 #include "code\modules\locks\lock_construct.dm"
 #include "code\modules\maps\dmm_suite.dm"
 #include "code\modules\maps\reader.dm"
-#include "code\modules\maps\swapmaps.dm"
-#include "code\modules\maps\writer.dm"
 #include "code\modules\materials\material_recipes.dm"
 #include "code\modules\materials\material_sheets.dm"
 #include "code\modules\materials\material_synth.dm"

@@ -79,8 +79,6 @@
 			return global._client_preferences_by_key;
 		if("_client_preferences_by_type")
 			return global._client_preferences_by_type;
-		if("_preloader")
-			return global._preloader;
 		if("account_hack_attempted")
 			return global.account_hack_attempted;
 		if("actor")
@@ -929,22 +927,6 @@
 			return global.supply_methods_;
 		if("surgery_steps")
 			return global.surgery_steps;
-		if("swapmaps_byname")
-			return global.swapmaps_byname;
-		if("swapmaps_compiled_maxx")
-			return global.swapmaps_compiled_maxx;
-		if("swapmaps_compiled_maxy")
-			return global.swapmaps_compiled_maxy;
-		if("swapmaps_compiled_maxz")
-			return global.swapmaps_compiled_maxz;
-		if("swapmaps_iconcache")
-			return global.swapmaps_iconcache;
-		if("swapmaps_initialized")
-			return global.swapmaps_initialized;
-		if("swapmaps_loaded")
-			return global.swapmaps_loaded;
-		if("swapmaps_mode")
-			return global.swapmaps_mode;
 		if("swing_hit_sound")
 			return global.swing_hit_sound;
 		if("switch_sound")
@@ -1087,7 +1069,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1168,8 +1150,6 @@
 			global._client_preferences_by_key=newval;
 		if("_client_preferences_by_type")
 			global._client_preferences_by_type=newval;
-		if("_preloader")
-			global._preloader=newval;
 		if("account_hack_attempted")
 			global.account_hack_attempted=newval;
 		if("actor")
@@ -2018,22 +1998,6 @@
 			global.supply_methods_=newval;
 		if("surgery_steps")
 			global.surgery_steps=newval;
-		if("swapmaps_byname")
-			global.swapmaps_byname=newval;
-		if("swapmaps_compiled_maxx")
-			global.swapmaps_compiled_maxx=newval;
-		if("swapmaps_compiled_maxy")
-			global.swapmaps_compiled_maxy=newval;
-		if("swapmaps_compiled_maxz")
-			global.swapmaps_compiled_maxz=newval;
-		if("swapmaps_iconcache")
-			global.swapmaps_iconcache=newval;
-		if("swapmaps_initialized")
-			global.swapmaps_initialized=newval;
-		if("swapmaps_loaded")
-			global.swapmaps_loaded=newval;
-		if("swapmaps_mode")
-			global.swapmaps_mode=newval;
 		if("swing_hit_sound")
 			global.swing_hit_sound=newval;
 		if("switch_sound")
@@ -2176,7 +2140,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
