@@ -1,11 +1,11 @@
 // Hey! Listen! Update \config\exoplanetruinblacklist.txt with your new ruins!
 
 /datum/map_template/ruin/exoplanet
-	prefix = "_maps/RandomRuins/ExoplanetRuins/"
+	prefix = "maps/random_ruins/exoplanet_ruins/"
 
-/datum/map_template/ruin/exoplanet/testing
-	name = "Thasc's Test Thing"
-	id = "thascs-test-thing"
-	description = "oh wow look it's really here"
-	suffix = "thascs-test-thing.dmm"
+/datum/map_template/ruin/exoplanet/house
+	name = "House"
+	id = "house"
+	description = "oh wow look it's a nice house"
+	suffix = "house.dmm"
 	cost = 1

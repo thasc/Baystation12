@@ -1,0 +1,34 @@
+"a" = (/turf/simulated/wall/wood,/area/centcom)
+"b" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/wood,/area/centcom)
+"c" = (/obj/machinery/power/smes/buildable/preset/torch/engine_main,/obj/structure/cable{icon_state = "0-2"; dir = 4; pixel_y = 0; d1 = 16; d2 = 0},/obj/machinery/light{dir = 1},/turf/simulated/floor/wood,/area/centcom)
+"d" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_y = 0},/turf/simulated/floor/wood,/area/centcom)
+"e" = (/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24; req_access = list(201)},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/wood,/area/centcom)
+"f" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/wood,/area/centcom)
+"g" = (/obj/structure/bookcase,/turf/simulated/floor/wood,/area/centcom)
+"h" = (/turf/simulated/floor/wood,/area/centcom)
+"i" = (/obj/structure/bed/chair/wood,/turf/simulated/floor/wood,/area/centcom)
+"j" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/turf/simulated/floor/wood,/area/centcom)
+"k" = (/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/centcom)
+"l" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Wardrobe"},/turf/simulated/floor/wood,/area/centcom)
+"m" = (/mob/living/simple_animal/corgi,/turf/simulated/floor/wood,/area/centcom)
+"n" = (/obj/machinery/light,/turf/simulated/floor/wood,/area/centcom)
+"o" = (/obj/structure/bed/chair/wood{dir = 1},/turf/simulated/floor/wood,/area/centcom)
+"p" = (/obj/machinery/door/unpowered/simple/wood,/turf/simulated/floor/wood,/area/centcom)
+"q" = (/turf/template_noop,/area/centcom)
+"r" = (/obj/structure/closet/crate/plastic,/turf/template_noop,/area/centcom)
+"s" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/wood,/area/centcom)
+"t" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/wood,/area/centcom)
+"u" = (/obj/structure/closet/crate/bin,/turf/template_noop,/area/centcom)
+
+(1,1,1) = {"
+aabbbaaaaaaaaabbbaaa
+acdddefggggggfhiiifa
+ahhhhhhhhhhhhhhjkkha
+alhmmmmmhhmmmmhkkkha
+alhmjkkmhhhnhnhooona
+alhmkkkmhhaapabbbaaa
+alhmmmmmhhaqqrqqqqqq
+ashhhhhhhtaqqquuuqqq
+ahhhhhhhhhaqqqqqqqqq
+aabbbabbbaaqqqqqqqqq
+"}
