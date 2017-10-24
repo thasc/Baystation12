@@ -46,6 +46,9 @@
 
 	num_exoplanets = 1
 
+	exoplanet_ruin_budget = 10
+	space_ruin_budget = 0
+
 /datum/map/torch/setup_map()
 	..()
 	system_name = generate_system_name()

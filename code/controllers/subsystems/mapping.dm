@@ -7,12 +7,12 @@ SUBSYSTEM_DEF(mapping)
 
 	var/list/ruins_templates = list()
 	var/list/space_ruins_templates = list()
-	var/list/lava_ruins_templates = list()
+	var/list/exoplanet_ruins_templates = list()
 
 /mob/verb/spawn_some_crap()
 	set name = "Spawn some shit yo!"
 	set category = "Testing yo"
-	seedRuins(list(src.z), 15, /area/exoplanet, SSmapping.lava_ruins_templates)
+	seedRuins(list(src.z), 15, /area/exoplanet, SSmapping.exoplanet_ruins_templates)
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 	preloadTemplates()
@@ -23,7 +23,7 @@ SUBSYSTEM_DEF(mapping)
 	map_templates = SSmapping.map_templates
 	ruins_templates = SSmapping.ruins_templates
 	space_ruins_templates = SSmapping.space_ruins_templates
-	lava_ruins_templates = SSmapping.lava_ruins_templates
+	exoplanet_ruins_templates = SSmapping.exoplanet_ruins_templates
 
 /datum/controller/subsystem/mapping/proc/preloadTemplates(path = "_maps/templates/") //see master controller setup
 	var/list/filelist = flist(path)
@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/proc/preloadRuinTemplates()
 	// Still supporting bans by filename
-	var/list/banned = generateMapList("config/lavaruinblacklist.txt")
+	var/list/banned = generateMapList("config/exoplanetruinblacklist.txt")
 	banned += generateMapList("config/spaceruinblacklist.txt")
 
 	for(var/item in sortList(subtypesof(/datum/map_template/ruin), /proc/cmp_ruincost_priority))
@@ -51,6 +51,6 @@ SUBSYSTEM_DEF(mapping)
 		ruins_templates[R.name] = R
 
 		if(istype(R, /datum/map_template/ruin/exoplanet))
-			lava_ruins_templates[R.name] = R
+			exoplanet_ruins_templates[R.name] = R
 		else if(istype(R, /datum/map_template/ruin/space))
 			space_ruins_templates[R.name] = R

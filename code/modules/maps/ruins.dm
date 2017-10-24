@@ -73,8 +73,6 @@
 
 	if(!overall_sanity)
 		log_world("Ruin loader gave up with [budget] left to spend.")
-	else
-		log_world("Ruin loader finished on time and on budget!")
 
 
 /obj/effect/ruin_loader
