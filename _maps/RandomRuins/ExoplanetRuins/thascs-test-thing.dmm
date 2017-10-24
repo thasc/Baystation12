@@ -1,0 +1,32 @@
+"a" = (/turf/simulated/floor/bluegrid,/area/djstation)
+"b" = (/turf/template_noop,/area/djstation)
+"c" = (/turf/simulated/floor/greengrid,/area/djstation)
+"d" = (/obj/machinery/floodlight,/turf/template_noop,/area/djstation)
+"e" = (/mob/living/simple_animal/corgi/Ian,/turf/template_noop,/area/djstation)
+"f" = (/mob/living/simple_animal/cat/kitten,/turf/simulated/floor/bluegrid,/area/djstation)
+"g" = (/mob/living/simple_animal/cat/kitten,/turf/template_noop,/area/djstation)
+"h" = (/mob/living/simple_animal/cat/kitten,/turf/simulated/floor/greengrid,/area/djstation)
+"i" = (/mob/living/simple_animal/corgi/Ian,/turf/simulated/floor/greengrid,/area/djstation)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+abccccccccccccccccccccccccccccba
+abcdbbbbbbebbbbbbbbbbbbbbbbbdcba
+abcbaaaafaaaaaaaaaaaaafaaaaabcba
+abcbadbbbbbbdbbgbbbdbbbbbbdabcba
+agcbabcccebbccbbbccbbcccbcbabcba
+abcbabcbbcbcbgcbcebcbbcbbcbabcba
+abcbfbcbbcbcbbcbcbbcbbhbbcbabcba
+abcgabcbgcbcebcbcbbcbbcbecbabhba
+abcbabcbbcbcbbcbcbbcbbcbbcbabcba
+abibabibbcbcbbcbcgbcbehbbhbabcba
+abcbabcbgcbcbbcgcbbcbbcbbbbabcba
+abcbabcccbbbccbbbccbbbcbbcbabcba
+abibadbgbbbbdbbbbbbdbbbbbbdabcga
+abcbaaaaaaaaaaaaaaaaaaaaaaaabcba
+abcdbbbbbbbbebbbbbbbbebbbbbbdcba
+abccccccicccicccccccccccccccccba
+abbbbbbbbbbbbbbbbgbbgbbbbebbbbba
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

@@ -97,6 +97,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/num_exoplanets = 0
 
+	var/exoplanet_ruin_budget = 0
+	var/space_ruin_budget = 0 // unsure if this makes sense given our space setup, but...
+
 	//Economy stuff
 	var/starting_money = 75000		//Money in station account
 	var/department_money = 5000		//Money in department accounts
@@ -169,8 +172,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		return
 
 	for(var/i = 0, i < num_exoplanets, i++)
-		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/sector/exoplanet)) 
-		var/obj/effect/overmap/sector/exoplanet/new_planet = new exoplanet_type 
+		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/sector/exoplanet))
+		var/obj/effect/overmap/sector/exoplanet/new_planet = new exoplanet_type
 		new_planet.build_level()
 
 // Used to apply various post-compile procedural effects to the map.

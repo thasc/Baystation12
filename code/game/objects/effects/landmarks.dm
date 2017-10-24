@@ -242,3 +242,17 @@
 	new /obj/item/clothing/mask/spirit(src.loc)
 	new /obj/item/clothing/under/savage_hunter/female(src.loc)
 	delete_me = 1
+
+/obj/effect/landmark/ruin
+	var/datum/map_template/ruin/ruin_template
+
+/obj/effect/landmark/ruin/New(loc, my_ruin_template)
+	name = "ruin_[GLOB.ruin_landmarks.len + 1]"
+	..(loc)
+	ruin_template = my_ruin_template
+	GLOB.ruin_landmarks |= src
+
+/obj/effect/landmark/ruin/Destroy()
+	GLOB.ruin_landmarks -= src
+	ruin_template = null
+	. = ..()
