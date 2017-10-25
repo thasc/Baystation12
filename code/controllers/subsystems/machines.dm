@@ -80,8 +80,11 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	for(var/datum/powernet/PN in powernets)
 		qdel(PN)
 	powernets.Cut()
+	setup_powernets_for_cables(cable_list)
 
-	for(var/obj/structure/cable/PC in cable_list)
+/datum/controller/subsystem/machines/proc/setup_powernets_for_cables(list/cables)
+	for(var/A in cables)
+		var/obj/structure/cable/PC = A
 		if(!PC.powernet)
 			var/datum/powernet/NewPN = new()
 			NewPN.add_cable(PC)
