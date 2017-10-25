@@ -14,11 +14,11 @@
 "n" = (/obj/machinery/light,/turf/simulated/floor/wood,/area/centcom)
 "o" = (/obj/structure/bed/chair/wood{dir = 1},/turf/simulated/floor/wood,/area/centcom)
 "p" = (/obj/machinery/door/unpowered/simple/wood,/turf/simulated/floor/wood,/area/centcom)
-"q" = (/turf/template_noop,/area/centcom)
-"r" = (/obj/structure/closet/crate/plastic,/turf/template_noop,/area/centcom)
+"q" = (/turf/template_noop,/area/template_noop)
+"r" = (/obj/structure/closet/crate/plastic,/turf/template_noop,/area/template_noop)
 "s" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/wood,/area/centcom)
 "t" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/wood,/area/centcom)
-"u" = (/obj/structure/closet/crate/bin,/turf/template_noop,/area/centcom)
+"u" = (/obj/structure/closet/crate/bin,/turf/template_noop,/area/template_noop)
 
 (1,1,1) = {"
 aabbbaaaaaaaaabbbaaa
