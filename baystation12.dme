@@ -2480,6 +2480,8 @@
 #include "maps\_map_include.dm"
 #include "maps\example\example_define.dm"
 #include "maps\overmap_example\overmap_example_define.dm"
+#include "maps\random_ruins\space_ruins\multi_zas_test.dmm"
+#include "maps\random_ruins\space_ruins\zas_test.dmm"
 #include "maps\torch\torch.dm"
 #include "maps\torch\torch_define.dm"
 #include "maps\~mapsystem\map_preferences.dm"

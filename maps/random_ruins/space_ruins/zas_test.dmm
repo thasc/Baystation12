@@ -1,0 +1,16 @@
+"a" = (/turf/simulated/wall/silvergold,/area/template_noop)
+"b" = (/turf/simulated/floor/plating,/area/template_noop)
+"c" = (/mob/living/simple_animal/corgi,/turf/simulated/floor/plating,/area/template_noop)
+
+(1,1,1) = {"
+aaaaaaaaaa
+abbbbbbbba
+abccccccba
+abccccccba
+abccccccba
+abccccccba
+abccccccba
+abccccccba
+abbbbbbbba
+aaaaaaaaaa
+"}
