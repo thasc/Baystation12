@@ -51,16 +51,18 @@
 			return global.SSlegacy;
 		if("SSmachines")
 			return global.SSmachines;
+		if("SSmapping")
+			return global.SSmapping;
 		if("SSmobs")
 			return global.SSmobs;
-		if("SSvines")
-			return global.SSvines;
 		if("SSobj")
 			return global.SSobj;
 		if("SSopen_space")
 			return global.SSopen_space;
 		if("SSprocessing")
 			return global.SSprocessing;
+		if("SSvines")
+			return global.SSvines;
 		if("Tier1Runes")
 			return global.Tier1Runes;
 		if("Tier2Runes")
@@ -1085,7 +1087,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1138,16 +1140,18 @@
 			global.SSlegacy=newval;
 		if("SSmachines")
 			global.SSmachines=newval;
+		if("SSmapping")
+			global.SSmapping=newval;
 		if("SSmobs")
 			global.SSmobs=newval;
-		if("SSvines")
-			global.SSvines=newval;
 		if("SSobj")
 			global.SSobj=newval;
 		if("SSopen_space")
 			global.SSopen_space=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
+		if("SSvines")
+			global.SSvines=newval;
 		if("Tier1Runes")
 			global.Tier1Runes=newval;
 		if("Tier2Runes")
@@ -2172,7 +2176,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2199,11 +2203,12 @@
 	"SSgarbage",
 	"SSlegacy",
 	"SSmachines",
+	"SSmapping",
 	"SSmobs",
-	"SSvines",
 	"SSobj",
 	"SSopen_space",
 	"SSprocessing",
+	"SSvines",
 	"Tier1Runes",
 	"Tier2Runes",
 	"Tier3Runes",
@@ -2213,7 +2218,6 @@
 	"_client_preferences",
 	"_client_preferences_by_key",
 	"_client_preferences_by_type",
-	"_preloader",
 	"account_hack_attempted",
 	"actor",
 	"additional_antag_types",
@@ -2514,7 +2518,6 @@
 	"next_station_date_change",
 	"ninjas",
 	"ninjastart",
-	"non_fakeattack_weapons",
 	"not_incapacitated_turf_state",
 	"ntnet_card_uid",
 	"ntnet_global",
