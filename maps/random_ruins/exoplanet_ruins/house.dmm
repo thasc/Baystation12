@@ -2,34 +2,41 @@
 "b" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/wood,/area/djstation)
 "c" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/djstation)
 "d" = (/turf/simulated/floor/plating,/area/djstation)
-"e" = (/obj/structure/bookcase,/turf/simulated/floor/plating,/area/djstation)
-"f" = (/obj/structure/bed/chair/wood,/turf/simulated/floor/plating,/area/djstation)
-"g" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/turf/simulated/floor/plating,/area/djstation)
-"h" = (/obj/structure/table/woodentable,/turf/simulated/floor/plating,/area/djstation)
-"i" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Wardrobe"},/turf/simulated/floor/plating,/area/djstation)
-"j" = (/mob/living/simple_animal/corgi,/turf/simulated/floor/plating,/area/djstation)
-"k" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/plating,/area/djstation)
-"l" = (/obj/machinery/power/apc{dir = 1},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/djstation)
-"m" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/djstation)
-"n" = (/obj/structure/bed/chair/wood{dir = 1},/turf/simulated/floor/plating,/area/djstation)
-"o" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/djstation)
-"p" = (/obj/machinery/door/unpowered/simple/wood,/turf/simulated/floor/wood,/area/djstation)
-"q" = (/turf/template_noop,/area/template_noop)
-"r" = (/obj/structure/closet/crate/plastic,/turf/template_noop,/area/template_noop)
-"s" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/djstation)
-"t" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/djstation)
-"u" = (/obj/structure/closet/crate/bin,/turf/template_noop,/area/template_noop)
-"v" = (/obj/machinery/power/debug_items/infinite_generator,/obj/structure/cable,/turf/simulated/floor/plating,/area/djstation)
+"e" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 4; start_pressure = 740.5},/turf/simulated/floor/plating,/area/djstation)
+"f" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/turf/simulated/floor/plating,/area/djstation)
+"g" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/plating,/area/djstation)
+"h" = (/obj/machinery/alarm{alarm_id = "xenobio4_alarm"; dir = 2; icon_state = "alarm0"; pixel_x = 0; pixel_y = 24},/turf/simulated/floor/plating,/area/djstation)
+"i" = (/obj/structure/bookcase,/turf/simulated/floor/plating,/area/djstation)
+"j" = (/obj/structure/bed/chair/wood,/turf/simulated/floor/plating,/area/djstation)
+"k" = (/obj/machinery/atmospherics/portables_connector{icon_state = "map_connector"; dir = 4},/obj/machinery/portable_atmospherics/canister/empty,/turf/simulated/floor/plating,/area/djstation)
+"l" = (/obj/machinery/atmospherics/pipe/simple/visible/red{icon_state = "intact"; dir = 4},/turf/simulated/floor/plating,/area/djstation)
+"m" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/plating,/area/djstation)
+"n" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/turf/simulated/floor/plating,/area/djstation)
+"o" = (/obj/structure/table/woodentable,/turf/simulated/floor/plating,/area/djstation)
+"p" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Wardrobe"},/turf/simulated/floor/plating,/area/djstation)
+"q" = (/mob/living/simple_animal/corgi,/turf/simulated/floor/plating,/area/djstation)
+"r" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/plating,/area/djstation)
+"s" = (/obj/machinery/power/apc{dir = 1},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/djstation)
+"t" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/djstation)
+"u" = (/obj/structure/bed/chair/wood{dir = 1},/turf/simulated/floor/plating,/area/djstation)
+"v" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/djstation)
+"w" = (/obj/machinery/door/unpowered/simple/wood,/turf/simulated/floor/wood,/area/djstation)
+"x" = (/turf/template_noop,/area/template_noop)
+"y" = (/obj/structure/closet/crate/plastic,/turf/template_noop,/area/template_noop)
+"z" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/djstation)
+"A" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/djstation)
+"B" = (/obj/structure/closet/crate/bin,/turf/template_noop,/area/template_noop)
+"C" = (/obj/machinery/power/debug_items/infinite_generator,/obj/structure/cable,/turf/simulated/floor/plating,/area/djstation)
 
 (1,1,1) = {"
 aabbbaaaaaaaaabbbaaa
-acddddcddeeeecdfffca
-addddddddddddddghhda
-aidjjjjjddjjjjdhhhda
-aidjghhjdklmdmdnnnma
-aidjhhhjdoaapabbbaaa
-aidjjjjjdoaqqrqqqqqq
-asdddddddtaqqquuuqqq
-addddddddvaqqqqqqqqq
-aabbbabbbaaqqqqqqqqq
+acdefgcdhiiiicdjjjca
+addklmddegdddddnooda
+apdqqqqqkmqqqqdoooda
+apdqnooqdrstdtduuuta
+apdqoooqdvaawabbbaaa
+apdqqqqqdvaxxyxxxxxx
+azdddddddAaxxxBBBxxx
+addddddddCaxxxxxxxxx
+aabbbabbbaaxxxxxxxxx
 "}
