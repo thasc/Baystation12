@@ -123,7 +123,9 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines, do
 		machine.build_network()
 		CHECK_SLEEP_MACHINES
 
+#ifndef UNIT_TEST
 	initialized_objects = 0
+#endif
 
 #undef CHECK_SLEEP_MASTER
 
