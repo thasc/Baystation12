@@ -40,20 +40,7 @@
 
 	SSatoms.InitializeAtoms(atoms)
 	SSmachines.setup_powernets_for_cables(cables)
-
-	for(var/obj/machinery/atmospherics/A in atmos_machines)
-		A.atmos_init()
-
-	for(var/obj/machinery/atmospherics/unary/U in atmos_machines)
-		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
-			var/obj/machinery/atmospherics/unary/vent_pump/T = U
-			T.broadcast_status()
-		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
-			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
-			T.broadcast_status()
-
-	for(var/obj/machinery/atmospherics/machine in atmos_machines)
-		machine.build_network()
+	SSmachines.setup_atmos_machinery(atmos_machines)
 
 /datum/map_template/proc/load_new_z()
 	var/x = round(world.maxx/2)

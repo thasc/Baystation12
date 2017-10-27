@@ -49,6 +49,7 @@ SUBSYSTEM_DEF(machines)
 
 /datum/controller/subsystem/machines/Initialize(timeofday)
 	makepowernets()
+	setup_atmos_machinery(machinery)
 	fire()
 	..()
 
@@ -89,6 +90,39 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 			var/datum/powernet/NewPN = new()
 			NewPN.add_cable(PC)
 			propagate_network(PC,PC.powernet)
+
+#ifdef UNIT_TEST
+#define CHECK_SLEEP_MACHINES // For unit tests we don't care about a smooth lobby screen experience. We care about speed.
+#else
+#define CHECK_SLEEP_MACHINES if(!(initialization_stage & INITIALIZATION_NOW) && ++initialized_objects > 500) { initialized_objects=0;sleep(world.tick_lag); }
+#endif
+
+datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
+	set background=1
+#ifndef UNIT_TEST
+	var/initialized_objects = 0
+#endif
+
+	for(var/obj/machinery/atmospherics/A in machines)
+		A.atmos_init()
+		CHECK_SLEEP_MACHINES
+
+	for(var/obj/machinery/atmospherics/unary/U in machines)
+		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
+			var/obj/machinery/atmospherics/unary/vent_pump/T = U
+			T.broadcast_status()
+		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
+			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
+			T.broadcast_status()
+		CHECK_SLEEP_MACHINES
+
+	for(var/obj/machinery/atmospherics/machine in machines)
+		machine.build_network()
+		CHECK_SLEEP_MACHINES
+
+	initialized_objects = 0
+
+#undef CHECK_SLEEP_MASTER
 
 /datum/controller/subsystem/machines/stat_entry()
 	var/msg = list()
