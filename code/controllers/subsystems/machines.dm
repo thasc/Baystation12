@@ -127,7 +127,7 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines, do
 	initialized_objects = 0
 #endif
 
-#undef CHECK_SLEEP_MASTER
+#undef CHECK_SLEEP_MACHINES
 
 /datum/controller/subsystem/machines/stat_entry()
 	var/msg = list()
