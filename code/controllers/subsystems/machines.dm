@@ -97,12 +97,13 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 #define CHECK_SLEEP_MACHINES if(!(initialization_stage & INITIALIZATION_NOW) && ++initialized_objects > 500) { initialized_objects=0;sleep(world.tick_lag); }
 #endif
 
-datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
+datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines, do_report_progress=TRUE)
 	set background=1
 #ifndef UNIT_TEST
 	var/initialized_objects = 0
 #endif
-
+	if (do_report_progress)
+		report_progress("Initializing atmos machinery")
 	for(var/obj/machinery/atmospherics/A in machines)
 		A.atmos_init()
 		CHECK_SLEEP_MACHINES
@@ -116,6 +117,8 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 			T.broadcast_status()
 		CHECK_SLEEP_MACHINES
 
+	if (do_report_progress)
+		report_progress("Initializing pipe networks")
 	for(var/obj/machinery/atmospherics/machine in machines)
 		machine.build_network()
 		CHECK_SLEEP_MACHINES

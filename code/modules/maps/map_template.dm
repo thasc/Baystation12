@@ -38,9 +38,9 @@
 			if(istype(A, /obj/machinery/atmospherics))
 				atmos_machines += A
 
-	SSatoms.InitializeAtoms(atoms)
+	SSatoms.InitializeAtoms(atoms, FALSE)
 	SSmachines.setup_powernets_for_cables(cables)
-	SSmachines.setup_atmos_machinery(atmos_machines)
+	SSmachines.setup_atmos_machinery(atmos_machines, FALSE)
 
 /datum/map_template/proc/load_new_z()
 	var/x = round(world.maxx/2)
