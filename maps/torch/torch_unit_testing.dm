@@ -120,7 +120,8 @@
 		/area/exoplanet/desert,
 		/area/exoplanet/grass,
 		/area/exoplanet/snow,
-		/area/exoplanet/garbage
+		/area/exoplanet/garbage,
+		/area/template_noop
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber
