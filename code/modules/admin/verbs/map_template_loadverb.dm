@@ -1,13 +1,12 @@
 /client/proc/map_template_load()
 	set category = "Debug"
-	set name = "Map template - Place"
-
-	var/datum/map_template/template
+	set name = "Map Template - Place"
 
 	var/map = input(usr, "Choose a Map Template to place at your CURRENT LOCATION","Place Map Template") as null|anything in SSmapping.map_templates
 	if(!map)
 		return
-	template = SSmapping.map_templates[map]
+
+	var/datum/map_template/template = SSmapping.map_templates[map]
 
 	var/turf/T = get_turf(mob)
 	if(!T)
@@ -23,6 +22,21 @@
 		else
 			to_chat(usr, "Failed to place map")
 	usr.client.images -= preview
+
+/client/proc/map_template_load_new_z()
+	set category = "Debug"
+	set name = "Map Template - Place In New Z"
+
+	var/map = input(usr, "Choose a Map Template to place on a new zlevel","Place Map Template") as null|anything in SSmapping.map_templates
+	if(!map)
+		return
+
+	var/datum/map_template/template = SSmapping.map_templates[map]
+	var/new_z_centre = template.load_new_z()
+	if (new_z_centre)
+		log_and_message_admins("has placed a map template ([template.name]) on a new zlevel.", location=new_z_centre)
+	else
+		to_chat(usr, "Failed to place map")
 
 /client/proc/map_template_upload()
 	set category = "Debug"

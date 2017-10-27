@@ -48,11 +48,13 @@
 
 	var/list/bounds = maploader.load_map(file(mappath), x, y)
 	if(!bounds)
-		return FALSE
+		return
 
 	//initialize things that are normally initialized after map load
 	initTemplateBounds(bounds)
 	log_game("Z-level [name] loaded at at [x],[y],[world.maxz]")
+
+	return locate(x, y, world.maxz)
 
 /datum/map_template/proc/load(turf/T, centered = FALSE)
 	if(centered)
