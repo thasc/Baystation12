@@ -19,7 +19,7 @@
 	usr.client.images += preview
 	if(alert(usr,"Confirm location.","Template Confirm","Yes","No") == "Yes")
 		if(template.load(T, centered = TRUE))
-			message_admins("<span class='adminnotice'>[key_name_admin(usr)] has placed a map template ([template.name]) at [admin_jump_link(T, src)]</span>")
+			log_and_message_admins("has placed a map template ([template.name]) at [T.loc].")
 		else
 			to_chat(usr, "Failed to place map")
 	usr.client.images -= preview
