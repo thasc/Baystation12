@@ -50,10 +50,6 @@
 	if(!bounds)
 		return FALSE
 
-	//smooth_zlevel(world.maxz) TODO: what's this OwO
-	// repopulate_sorted_areas()  TODO: what's this OwO
-
-	// SSlighting.initialize_lighting_objects(block(locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]),locate(bounds[MAP_MAXX], bounds[MAP_MAXY], bounds[MAP_MAXZ]))) TODO: what's this OwO
 	//initialize things that are normally initialized after map load
 	initTemplateBounds(bounds)
 	log_game("Z-level [name] loaded at at [x],[y],[world.maxz]")
@@ -71,10 +67,6 @@
 	var/list/bounds = maploader.load_map(file(mappath), T.x, T.y, T.z, cropMap=TRUE)
 	if(!bounds)
 		return
-
-	// TODO: what's these two OwO
-	//if(!SSmapping.loading_ruins) //Will be done manually during mapping ss init
-	//	repopulate_sorted_areas()
 
 	//initialize things that are normally initialized after map load
 	initTemplateBounds(bounds)
