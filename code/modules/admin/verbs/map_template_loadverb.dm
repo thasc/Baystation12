@@ -31,8 +31,11 @@
 	if(!map)
 		return
 
+	var/force_overmap_response = alert(src, "Do you want to force this template onto the overmap?","Place Map Template","Yes","No")
+	var/force_overmap = force_overmap_response == "Yes"
+
 	var/datum/map_template/template = SSmapping.map_templates[map]
-	var/new_z_centre = template.load_new_z()
+	var/new_z_centre = template.load_new_z(force_overmap)
 	if (new_z_centre)
 		log_and_message_admins("has placed a map template ([template.name]) on a new zlevel.", location=new_z_centre)
 	else

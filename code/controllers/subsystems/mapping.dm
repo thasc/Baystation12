@@ -9,11 +9,6 @@ SUBSYSTEM_DEF(mapping)
 	var/list/space_ruins_templates = list()
 	var/list/exoplanet_ruins_templates = list()
 
-/mob/verb/spawn_some_crap()
-	set name = "Spawn some shit yo!"
-	set category = "Testing yo"
-	seedRuins(list(src.z), 15, /area/exoplanet, SSmapping.exoplanet_ruins_templates)
-
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 	preloadTemplates()
 	..()

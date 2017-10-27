@@ -20,9 +20,11 @@
 		height = bounds[MAP_MAXY]
 	return bounds
 
-/datum/map_template/proc/initTemplateBounds(var/list/bounds)
+/datum/map_template/proc/initTemplateBounds(var/list/bounds, var/force_overmap)
+
 	var/list/obj/machinery/atmospherics/atmos_machines = list()
 	var/list/obj/structure/cable/cables = list()
+	var/list/obj/effect/overmap/overmap_stuff = list()
 	var/list/atom/atoms = list()
 
 	var/list/turfs = block(	locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]),
@@ -37,24 +39,36 @@
 				continue
 			if(istype(A, /obj/machinery/atmospherics))
 				atmos_machines += A
+			if(istype(A, /obj/effect/overmap))
+				overmap_stuff += A
+
+	if (force_overmap && (overmap_stuff.len == 0))
+		world << "Forcing overmap!"
+		var/obj/effect/overmap/sector/O = new (locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]))
+		O.name = "unidentified signal" // TODO: make properly name-able
+		atoms += O
 
 	SSatoms.InitializeAtoms(atoms, FALSE)
 	SSmachines.setup_powernets_for_cables(cables)
 	SSmachines.setup_atmos_machinery(atmos_machines, FALSE)
 
-/datum/map_template/proc/load_new_z()
-	var/x = round(world.maxx/2)
-	var/y = round(world.maxy/2)
+/datum/map_template/proc/load_new_z(var/force_overmap)
+
+	var/x = round((world.maxx - width)/2)
+	var/y = round((world.maxy - height)/2)
+
+	if (x < 1) x = 1
+	if (y < 1) y = 1
 
 	var/list/bounds = maploader.load_map(file(mappath), x, y)
 	if(!bounds)
 		return
 
 	//initialize things that are normally initialized after map load
-	initTemplateBounds(bounds)
-	log_game("Z-level [name] loaded at at [x],[y],[world.maxz]")
+	initTemplateBounds(bounds, force_overmap)
+	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
 
-	return locate(x, y, world.maxz)
+	return locate(world.maxx/2, world.maxy/2, world.maxz)
 
 /datum/map_template/proc/load(turf/T, centered = FALSE)
 	if(centered)
