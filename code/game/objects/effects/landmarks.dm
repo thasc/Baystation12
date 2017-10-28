@@ -244,7 +244,7 @@
 	delete_me = 1
 
 /obj/effect/landmark/ruin
-	var/datum/map_template/ruin/ruin_template
+	var/datum/map_template/preregistered/ruin/ruin_template
 
 /obj/effect/landmark/ruin/New(loc, my_ruin_template)
 	name = "ruin_[GLOB.ruin_landmarks.len + 1]"

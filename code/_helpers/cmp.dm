@@ -55,5 +55,5 @@
 	if (!.)
 		. = B.qdels - A.qdels
 
-/proc/cmp_ruincost_priority(datum/map_template/ruin/A, datum/map_template/ruin/B)
+/proc/cmp_ruincost_priority(datum/map_template/preregistered/A, datum/map_template/preregistered/B)
 	return initial(A.cost) - initial(B.cost)

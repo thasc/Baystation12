@@ -48,6 +48,7 @@
 
 	exoplanet_ruin_budget = 10
 	space_ruin_budget = 0
+	away_site_budget = 5
 
 /datum/map/torch/setup_map()
 	..()

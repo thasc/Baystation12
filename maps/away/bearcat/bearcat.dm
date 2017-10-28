@@ -1,6 +1,6 @@
 #include "bearcat_areas.dm"
-#include "bearcat-1.dmm"
-#include "bearcat-2.dmm"
+//#include "bearcat-1.dmm"
+//#include "bearcat-2.dmm"
 
 /obj/effect/overmap/ship/bearcat
 	name = "FTV Bearcat"

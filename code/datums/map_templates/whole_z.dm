@@ -1,1 +1,0 @@
-// Hey! Listen! Update \config\whole_z_blacklist.txt with your new ruins!

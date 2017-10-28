@@ -1,6 +1,6 @@
 #include "mining_areas.dm"
-#include "mining-asteroid.dmm"
-#include "mining-signal.dmm"
+//#include "mining-asteroid.dmm"
+//#include "mining-signal.dmm"
 
 //MINING-1 // CLUSTER
 /obj/effect/overmap/sector/cluster
