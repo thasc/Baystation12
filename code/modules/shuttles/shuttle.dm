@@ -18,6 +18,7 @@
 	var/sound_landing = 'sound/effects/shuttle_landing.ogg'
 
 	var/knockdown = 1 //whether shuttle downs non-buckled people when it moves
+	var/defer_initialization = FALSE
 
 /datum/shuttle/New(_name, var/obj/effect/shuttle_landmark/initial_location)
 	..()

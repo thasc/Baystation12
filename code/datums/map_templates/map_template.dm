@@ -5,6 +5,7 @@
 	var/tallness = 0
 	var/mappath = null
 	var/loaded = 0 // Times loaded this round
+	var/list/shuttle_datums = list()
 
 /datum/map_template/New(path = null, rename = null)
 	if(path)
@@ -53,6 +54,10 @@
 	SSmachines.setup_powernets_for_cables(cables)
 	SSmachines.setup_atmos_machinery(atmos_machines, FALSE)
 
+/datum/map_template/proc/initShuttles()
+	for (var/shuttle_type in shuttle_datums)
+		shuttle_controller.initialize_shuttle(shuttle_type)
+
 /datum/map_template/proc/load_new_z(var/force_overmap)
 
 	if (tallness > 1) // aka this template has multiple zlevels and needs to be linked by the zlevel system...
@@ -71,6 +76,7 @@
 
 	//initialize things that are normally initialized after map load
 	initTemplateBounds(bounds, force_overmap)
+	initShuttles()
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
 
 	return locate(world.maxx/2, world.maxy/2, world.maxz)

@@ -1,5 +1,4 @@
 #include "derelict_areas.dm"
-//#include "derelict-station.dmm"
 
 /obj/effect/overmap/sector/derelict
 	name = "debris field"

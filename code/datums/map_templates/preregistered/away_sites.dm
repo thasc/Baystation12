@@ -5,12 +5,13 @@
 	cost = 1
 	allow_duplicates = FALSE
 
-///datum/map_template/preregistered/away_site/bearcat
-//	name = "FTV Bearcat"
-//	id = "away_ftv_bearcat"
-//	description = "you should google 'bearcats', they're super cute"
-//	suffix = "bearcat.dmm"
-//	cost = 1
+/datum/map_template/preregistered/away_site/bearcat
+	name = "FTV Bearcat"
+	id = "away_ftv_bearcat"
+	description = "you should google 'bearcats', they're super cute"
+	suffix = "bearcat.dmm"
+	cost = 1
+	shuttle_datums = list(/datum/shuttle/autodock/ferry/lift)
 
 /datum/map_template/preregistered/away_site/derelict
 	name = "debris field"
