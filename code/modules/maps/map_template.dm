@@ -43,9 +43,8 @@
 				overmap_stuff += A
 
 	if (force_overmap && (overmap_stuff.len == 0))
-		world << "Forcing overmap!"
 		var/obj/effect/overmap/sector/O = new (locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]))
-		O.name = "unidentified signal" // TODO: make properly name-able
+		O.name = "unidentified signal" // TODO: make properly name-able - may need to explicitly rename post-new
 		atoms += O
 
 	SSatoms.InitializeAtoms(atoms, FALSE)
