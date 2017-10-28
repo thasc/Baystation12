@@ -1,3 +1,4 @@
+GLOBAL_VAR_CONST(MAX_CONNECTABLE_ZLEVEL_INDEX, 0)
 
 proc/HasAbove(var/z)
 	return 0

@@ -2,6 +2,7 @@
 	var/name = "Default Template Name"
 	var/width = 0
 	var/height = 0
+	var/tallness = 0
 	var/mappath = null
 	var/loaded = 0 // Times loaded this round
 
@@ -18,6 +19,7 @@
 	if(bounds)
 		width = bounds[MAP_MAXX] // Assumes all templates are rectangular, have a single Z level, and begin at 1,1,1
 		height = bounds[MAP_MAXY]
+		tallness = bounds[MAP_MAXZ]
 	return bounds
 
 /datum/map_template/proc/initTemplateBounds(var/list/bounds, var/force_overmap)
@@ -52,6 +54,10 @@
 	SSmachines.setup_atmos_machinery(atmos_machines, FALSE)
 
 /datum/map_template/proc/load_new_z(var/force_overmap)
+
+	if (tallness > 1) // aka this template has multiple zlevels and needs to be linked by the zlevel system...
+		if (tallness + world.maxz > GLOB.MAX_CONNECTABLE_ZLEVEL_INDEX) // aka it's too tall to fit in the system...
+			return  // fug!
 
 	var/x = round((world.maxx - width)/2)
 	var/y = round((world.maxy - height)/2)
