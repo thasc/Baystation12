@@ -1,5 +1,4 @@
 #include "marooned_areas.dm"
-#include "marooned.dmm"
 #include "../mining/mining_areas.dm"
 
 /turf/simulated/floor/marooned/snow

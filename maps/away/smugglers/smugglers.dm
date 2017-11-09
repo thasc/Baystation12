@@ -1,4 +1,3 @@
-#include "smugglers.dmm"
 #include "smugglers_areas.dm"
 #include "../mining/mining_areas.dm"
 
