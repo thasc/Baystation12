@@ -10,12 +10,15 @@
 	var/allow_duplicates = TRUE
 
 	var/prefix = null
-	var/suffix = null
+	var/suffixes = null
 
 /datum/map_template/ruin/New()
 	if(!name && id)
 		name = id
 
-	mappath = prefix + suffix
-	..(path = mappath)
+	if (suffixes)
+		mappaths = list()
+		for (var/suffix in suffixes)
+			mappaths += (prefix + suffix)
 
+	..()
