@@ -28,6 +28,7 @@
 
 /datum/map_template/proc/init_atoms(var/list/atoms)
 	var/list/obj/machinery/atmospherics/atmos_machines = list()
+	var/list/obj/machinery/machines = list()
 	var/list/obj/structure/cable/cables = list()
 
 	for(var/A in atoms)
@@ -35,10 +36,15 @@
 			cables += A
 		if(istype(A, /obj/machinery/atmospherics))
 			atmos_machines += A
+		if(istype(A, /obj/machinery))
+			machines += A
 
 	SSatoms.InitializeAtoms(atoms)
 	SSmachines.setup_powernets_for_cables(cables)
 	SSmachines.setup_atmos_machinery(atmos_machines)
+
+	for (var/obj/machinery/machine in machines)
+		machine.power_change()
 
 /datum/map_template/proc/init_shuttles()
 	for (var/shuttle_type in shuttles_to_initialise)
