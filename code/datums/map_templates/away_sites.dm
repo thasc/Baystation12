@@ -48,6 +48,7 @@
 	description = "A mineral-rich, formerly-volcanic site on a planetoid."
 	suffixes = list("mining/mining-signal.dmm")
 	cost = 1
+	base_turf_for_zs = /turf/simulated/floor/asteroid
 
 /datum/map_template/ruin/away_site/smugglers
 	name = "Smugglers' Base"
