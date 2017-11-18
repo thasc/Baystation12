@@ -5,6 +5,7 @@
 	var/tallness = 0
 	var/list/mappaths = null
 	var/loaded = 0 // Times loaded this round
+	var/allow_duplicates = TRUE
 	var/list/shuttles_to_initialise = list()
 	var/base_turf_for_zs = null
 	var/accessibility_weight = 0
@@ -70,6 +71,7 @@
 	init_atoms(M.atoms_to_initialise)
 	init_shuttles()
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
+	loaded++
 
 	return locate(world.maxx/2, world.maxy/2, world.maxz)
 
@@ -91,6 +93,7 @@
 	init_atoms(M.atoms_to_initialise)
 	init_shuttles()
 	log_game("[name] loaded at at [T.x],[T.y],[T.z]")
+	loaded++
 
 	return TRUE
 

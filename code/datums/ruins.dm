@@ -7,7 +7,6 @@
 	It is clearly a mystery."
 
 	var/cost = null //negative numbers will always be placed, with lower (negative) numbers being placed first; positive and 0 numbers will be placed randomly
-	var/allow_duplicates = TRUE
 
 	var/prefix = null
 	var/suffixes = null
