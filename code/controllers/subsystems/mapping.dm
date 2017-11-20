@@ -30,9 +30,14 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/proc/preloadBlacklistableTemplates()
 	// Still supporting bans by filename
-	var/list/banned = generateMapList("config/exoplanet_ruin_blacklist.txt")
-	banned += generateMapList("config/space_ruin_blacklist.txt")
-	banned += generateMapList("config/away_site_blacklist.txt")
+	var/list/banned_exoplanet_dmms = generateMapList("config/exoplanet_ruin_blacklist.txt")
+	var/list/banned_space_dmms = generateMapList("config/space_ruin_blacklist.txt")
+	var/list/banned_away_site_dmms = generateMapList("config/away_site_blacklist.txt")
+
+	if (!banned_exoplanet_dmms || !banned_space_dmms || !banned_away_site_dmms)
+		report_progress("One or more map blacklist files are not present in the config directory!")
+
+	var/list/banned_maps = banned_exoplanet_dmms + banned_space_dmms + banned_away_site_dmms
 
 	for(var/item in sortList(subtypesof(/datum/map_template/ruin), /proc/cmp_ruincost_priority))
 		var/datum/map_template/ruin/ruin_type = item
@@ -41,12 +46,13 @@ SUBSYSTEM_DEF(mapping)
 			continue
 		var/datum/map_template/ruin/R = new ruin_type()
 
-		var/is_banned = FALSE
-		for (var/mappath in R.mappaths)
-			if(banned.Find(mappath))
-				is_banned = TRUE
-		if (is_banned)
-			continue
+		if (banned_maps)
+			var/is_banned = FALSE
+			for (var/mappath in R.mappaths)
+				if(banned_maps.Find(mappath))
+					is_banned = TRUE
+			if (is_banned)
+				continue
 
 		map_templates[R.name] = R
 
