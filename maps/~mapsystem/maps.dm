@@ -159,6 +159,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	lobby_music = new lobby_music_type()
 	world.update_status()
 
+/datum/map/proc/prepare_for_unit_tests()
+	return
+
 /datum/map/proc/send_welcome()
 	return
 

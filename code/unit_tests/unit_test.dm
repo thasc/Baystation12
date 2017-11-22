@@ -162,6 +162,8 @@ proc/load_unit_test_changes()
 	sleep(100)
 	log_unit_test("Initiating tests.")
 
+	GLOB.using_map.prepare_for_unit_tests()
+
 	//
 	// Run Tests
 	//
