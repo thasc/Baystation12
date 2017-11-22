@@ -4,6 +4,7 @@
 	var/height = 0
 	var/tallness = 0
 	var/list/mappaths = null
+	var/list/areas_mentioned = list()
 	var/loaded = 0 // Times loaded this round
 	var/allow_duplicates = TRUE
 	var/list/shuttles_to_initialise = list()
@@ -19,11 +20,12 @@
 		name = rename
 
 /datum/map_template/proc/preload_size(var/list/paths)
-	var/datum/map_load_metadata/M = maploader.load_map(paths, 1, 1, 1, cropMap=FALSE, measureOnly=TRUE)
+	var/datum/map_load_metadata/M = maploader.load_map(paths, 1, 1, 1, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE)
 	if(M)
 		width = M.bounds[MAP_MAXX] - M.bounds[MAP_MINX] + 1
 		height = M.bounds[MAP_MAXY] - M.bounds[MAP_MINX] + 1
 		tallness = M.bounds[MAP_MAXZ] - M.bounds[MAP_MINZ] + 1
+		areas_mentioned = M.areas_mentioned
 	return M
 
 /datum/map_template/proc/init_atoms(var/list/atoms)
@@ -110,7 +112,6 @@
 		if(corner)
 			placement = corner
 	return block(placement, locate(placement.x+width-1, placement.y+height-1, placement.z))
-
 
 //for your ever biggening badminnery kevinz000
 //❤ - Cyberboss

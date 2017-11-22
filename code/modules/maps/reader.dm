@@ -9,6 +9,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 /datum/map_load_metadata
 	var/bounds
 	var/list/atoms_to_initialise
+	var/list/areas_mentioned
 
 /dmm_suite
 		// /"([a-zA-Z]+)" = \(((?:.|\n)*?)\)\n(?!\t)|\((\d+),(\d+),(\d+)\) = \{"([a-zA-Z\n]*)"\}/g
@@ -65,6 +66,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 	var/list/all_atoms_to_initialise = list()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
+	var/list/areas_mentioned = list()
 
 	for (var/tfile in tfiles)
 		var/datum/map_load_metadata/M = load_map_zlevel(tfile, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower, x_upper, y_lower, y_upper)
@@ -76,11 +78,13 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			bounds[MAP_MAXY] = max(bounds[MAP_MAXY], M.bounds[MAP_MAXY])
 			bounds[MAP_MINZ] = min(bounds[MAP_MINZ], M.bounds[MAP_MINZ])
 			bounds[MAP_MAXZ] = max(bounds[MAP_MAXZ], M.bounds[MAP_MAXZ])
+			areas_mentioned |= M.areas_mentioned
 		z_offset = bounds[MAP_MAXZ] + 1
 
 	var/datum/map_load_metadata/M = new
 	M.atoms_to_initialise = all_atoms_to_initialise
 	M.bounds = bounds
+	M.areas_mentioned = areas_mentioned
 	return M
 
 /dmm_suite/proc/load_map_zlevel(var/tfile, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower, x_upper, y_lower, y_upper)
@@ -94,12 +98,15 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	var/list/atoms_to_delete = list()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 
+	var/list/areas_mentioned = list()
+
 	while(dmmRegex.Find(tfile, stored_index))
 		stored_index = dmmRegex.next
 
 		// "aa" = (/type{vars=blah})
 		if(dmmRegex.group[1]) // Model
 			var/key = dmmRegex.group[1]
+			var/model = dmmRegex.group[2]
 			if(grid_models[key]) // Duplicate model keys are ignored in DMMs
 				continue
 			if(key_len != length(key))
@@ -108,7 +115,13 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 				else
 					throw EXCEPTION("Inconsistant key length in DMM")
 			if(!measureOnly)
-				grid_models[key] = dmmRegex.group[2]
+				grid_models[key] = model
+			var/datum/model_data/D = parse_model(model, key, no_changeturf)
+			if (D)
+				for (var/member in D.members)
+					while (ispath(member, /area) && member != /area)
+						areas_mentioned |= member
+						member = PARENT(member)
 
 		// (1,1,1) = {"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
 		else if(dmmRegex.group[3]) // Coords
@@ -229,6 +242,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		var/datum/map_load_metadata/M = new
 		M.bounds = bounds
 		M.atoms_to_initialise = atoms_to_initialise
+		M.areas_mentioned = areas_mentioned
 		return M
 
 /**
@@ -269,75 +283,12 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		same construction as those contained in a .dmm file, and instantiates them.
 	*/
 
-	var/list/members //will contain all members (paths) in model (in our example : /turf/unsimulated/wall and /area/mine/explored)
-	var/list/members_attributes //will contain lists filled with corresponding variables, if any (in our example : list(icon_state = "rock") and list())
-	var/list/cached = modelCache[model]
-	var/index
+	var/datum/model_data/parsed_model = parse_model(model, model_key, no_changeturf)
+	if (!parsed_model)
+		return // we can skip this location, it's the default
 
-	if(cached)
-		members = cached[1]
-		members_attributes = cached[2]
-	else
-		/////////////////////////////////////////////////////////
-		//Constructing members and corresponding variables lists
-		////////////////////////////////////////////////////////
-
-		members = list()
-		members_attributes = list()
-		index = 1
-
-		var/old_position = 1
-		var/dpos
-
-		do
-			//finding next member (e.g /turf/unsimulated/wall{icon_state = "rock"} or /area/mine/explored)
-			dpos = find_next_delimiter_position(model, old_position, ",", "{", "}") //find next delimiter (comma here) that's not within {...}
-
-			var/full_def = trim_text(copytext(model, old_position, dpos)) //full definition, e.g : /obj/foo/bar{variables=derp}
-			var/variables_start = findtext(full_def, "{")
-			var/atom_def = text2path(trim_text(copytext(full_def, 1, variables_start))) //path definition, e.g /obj/foo/bar
-			old_position = dpos + 1
-
-			if(!atom_def) // Skip the item if the path does not exist.  Fix your crap, mappers!
-				continue
-
-			members += atom_def
-
-			//transform the variables in text format into a list (e.g {var1="derp"; var2; var3=7} => list(var1="derp", var2, var3=7))
-			var/list/fields
-
-			if(variables_start)//if there's any variable
-				full_def = copytext(full_def,variables_start+1,length(full_def))//removing the last '}'
-				fields = readlist(full_def, ";")
-				if(fields.len)
-					if(!trim(fields[fields.len]))
-						--fields.len
-					for(var/I in fields)
-						var/value = fields[I]
-						if(istext(value))
-							fields[I] = apply_text_macros(value)
-
-			//then fill the members_attributes list with the corresponding variables
-			members_attributes.len++
-			members_attributes[index++] = fields
-
-			CHECK_TICK
-		while(dpos != 0)
-
-		//check and see if we can just skip this turf
-		//So you don't have to understand this horrid statement, we can do this if
-		// 1. no_changeturf is set
-		// 2. the space_key isn't set yet
-		// 3. there are exactly 2 members
-		// 4. with no attributes
-		// 5. and the members are world.turf and world.area
-		// Basically, if we find an entry like this: "XXX" = (/turf/default, /area/default)
-		// We can skip calling this proc every time we see XXX
-		if(no_changeturf && !space_key && members.len == 2 && members_attributes.len == 2 && length(members_attributes[1]) == 0 && length(members_attributes[2]) == 0 && (world.area in members) && (world.turf in members))
-			space_key = model_key
-			return
-
-		modelCache[model] = list(members, members_attributes)
+	var/list/members = parsed_model.members
+	var/list/members_attributes = parsed_model.members_attributes
 
 	////////////////
 	//Instanciation
@@ -350,7 +301,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	var/atoms_to_delete = list()
 
 	//first instance the /area and remove it from the members list
-	index = members.len
+	var/index = members.len
 	if(members[index] != /area/template_noop)
 		is_not_noop = TRUE
 		var/list/attr = members_attributes[index]
@@ -413,6 +364,85 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	M.atoms_to_initialise = atoms_to_initialise
 	M.atoms_to_delete = atoms_to_delete
 	return M
+
+/datum/model_data
+	var/list/members
+	var/list/members_attributes
+
+/dmm_suite/proc/parse_model(model, model_key, no_changeturf)
+
+	var/list/cached = modelCache[model]
+	if(cached)
+		var/datum/model_data/result = new
+		result.members = cached[1]
+		result.members_attributes = cached[2]
+		return result
+	
+	/////////////////////////////////////////////////////////
+	//Constructing members and corresponding variables lists
+	////////////////////////////////////////////////////////
+
+	var/list/members = list()
+	var/list/members_attributes = list()
+
+	var/index = 1
+	var/old_position = 1
+	var/dpos
+
+	do
+		//finding next member (e.g /turf/unsimulated/wall{icon_state = "rock"} or /area/mine/explored)
+		dpos = find_next_delimiter_position(model, old_position, ",", "{", "}") //find next delimiter (comma here) that's not within {...}
+
+		var/full_def = trim_text(copytext(model, old_position, dpos)) //full definition, e.g : /obj/foo/bar{variables=derp}
+		var/variables_start = findtext(full_def, "{")
+		var/atom_def = text2path(trim_text(copytext(full_def, 1, variables_start))) //path definition, e.g /obj/foo/bar
+		old_position = dpos + 1
+
+		if(!atom_def) // Skip the item if the path does not exist.  Fix your crap, mappers!
+			continue
+
+		members += atom_def
+
+		//transform the variables in text format into a list (e.g {var1="derp"; var2; var3=7} => list(var1="derp", var2, var3=7))
+		var/list/fields
+
+		if(variables_start)//if there's any variable
+			full_def = copytext(full_def,variables_start+1,length(full_def))//removing the last '}'
+			fields = readlist(full_def, ";")
+			if(fields.len)
+				if(!trim(fields[fields.len]))
+					--fields.len
+				for(var/I in fields)
+					var/value = fields[I]
+					if(istext(value))
+						fields[I] = apply_text_macros(value)
+
+		//then fill the members_attributes list with the corresponding variables
+		members_attributes.len++
+		members_attributes[index++] = fields
+
+		CHECK_TICK
+	while(dpos != 0)
+
+	//check and see if we can just skip this turf
+	//So you don't have to understand this horrid statement, we can do this if
+	// 1. no_changeturf is set
+	// 2. the space_key isn't set yet
+	// 3. there are exactly 2 members
+	// 4. with no attributes
+	// 5. and the members are world.turf and world.area
+	// Basically, if we find an entry like this: "XXX" = (/turf/default, /area/default)
+	// We can skip calling this proc every time we see XXX
+	if(no_changeturf && !space_key && members.len == 2 && members_attributes.len == 2 && length(members_attributes[1]) == 0 && length(members_attributes[2]) == 0 && (world.area in members) && (world.turf in members))
+		space_key = model_key
+		return
+
+	modelCache[model] = list(members, members_attributes)
+
+	var/datum/model_data/result = new
+	result.members = members
+	result.members_attributes = members_attributes
+	return result
 
 ////////////////
 //Helpers procs
