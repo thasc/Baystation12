@@ -28,12 +28,12 @@
 		areas_mentioned = M.areas_mentioned
 	return M
 
-/datum/map_template/proc/init_atoms(var/list/atoms)
+/datum/map_template/proc/init_atoms(var/list/turfs, var/list/objs, var/list/mobs)
 	var/list/obj/machinery/atmospherics/atmos_machines = list()
 	var/list/obj/machinery/machines = list()
 	var/list/obj/structure/cable/cables = list()
 
-	for(var/A in atoms)
+	for(var/atom/A in objs)
 		if(istype(A, /obj/structure/cable))
 			cables += A
 		if(istype(A, /obj/machinery/atmospherics))
@@ -41,7 +41,10 @@
 		if(istype(A, /obj/machinery))
 			machines += A
 
-	SSatoms.InitializeAtoms(atoms)
+	SSatoms.InitializeAtoms(mobs)
+	SSatoms.InitializeAtoms(objs)
+	SSatoms.InitializeAtoms(turfs)
+
 	SSmachines.setup_powernets_for_cables(cables)
 	SSmachines.setup_atmos_machinery(atmos_machines)
 
@@ -76,7 +79,7 @@
 		GLOB.using_map.player_levels |= z_index
 
 	//initialize things that are normally initialized after map load
-	init_atoms(M.atoms_to_initialise)
+	init_atoms(M.turfs_to_initialise, M.objs_to_initialise, M.mobs_to_initialise)
 	init_shuttles()
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
 	loaded++
@@ -98,7 +101,7 @@
 		return
 
 	//initialize things that are normally initialized after map load
-	init_atoms(M.atoms_to_initialise)
+	init_atoms(M.turfs_to_initialise, M.objs_to_initialise, M.mobs_to_initialise)
 	init_shuttles()
 	log_game("[name] loaded at at [T.x],[T.y],[T.z]")
 	loaded++

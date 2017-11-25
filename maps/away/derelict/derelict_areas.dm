@@ -1,3 +1,12 @@
+/area/derelict/ship
+	name = "\improper Abandoned Ship"
+	icon_state = "yellow"
+
+/area/AIsattele
+	name = "\improper AI Satellite Teleporter Room"
+	icon_state = "teleporter"
+	ambience = list('sound/ambience/ambimalf.ogg')
+
 /area/constructionsite
 	name = "\improper Construction Site"
 	icon_state = "storage"

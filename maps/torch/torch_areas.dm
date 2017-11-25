@@ -702,12 +702,6 @@
 	icon_state = "toxstorage"
 	sound_env = SMALL_ENCLOSED
 
-//DJSTATION
-
-/area/djstation
-	name = "\improper Listening Post"
-	icon_state = "LP"
-
 // Supply
 
 /area/quartermaster/deckofficer
@@ -1258,19 +1252,6 @@
 /area/rnd/breakroom
 	name = "\improper Research Break Room"
 	icon_state = "researchbreak"
-
-
-// Derelict
-
-/area/derelict/ship
-	name = "\improper Abandoned Ship"
-	icon_state = "yellow"
-
-// Misc
-/area/AIsattele
-	name = "\improper AI Satellite Teleporter Room"
-	icon_state = "teleporter"
-	ambience = list('sound/ambience/ambimalf.ogg')
 
 /area/alien
 	name = "\improper Alien base"

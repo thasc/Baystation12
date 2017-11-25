@@ -8,7 +8,9 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 /datum/map_load_metadata
 	var/bounds
-	var/list/atoms_to_initialise
+	var/list/turfs_to_initialise
+	var/list/objs_to_initialise
+	var/list/mobs_to_initialise
 	var/list/areas_mentioned
 
 /dmm_suite
@@ -64,26 +66,32 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	if(!z_offset)
 		z_offset = world.maxz + 1
 
-	var/list/all_atoms_to_initialise = list()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
+	var/list/all_turfs_to_initialise = list()
+	var/list/all_objs_to_initialise = list()
+	var/list/all_mobs_to_initialise = list()
 	var/list/areas_mentioned = list()
 
 	for (var/tfile in tfiles)
 		var/datum/map_load_metadata/M = load_map_zlevel(tfile, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower, x_upper, y_lower, y_upper)
 		if (M)
-			all_atoms_to_initialise += M.atoms_to_initialise
 			bounds[MAP_MINX] = min(bounds[MAP_MINX], M.bounds[MAP_MINX])
 			bounds[MAP_MAXX] = max(bounds[MAP_MAXX], M.bounds[MAP_MAXX])
 			bounds[MAP_MINY] = min(bounds[MAP_MINY], M.bounds[MAP_MINY])
 			bounds[MAP_MAXY] = max(bounds[MAP_MAXY], M.bounds[MAP_MAXY])
 			bounds[MAP_MINZ] = min(bounds[MAP_MINZ], M.bounds[MAP_MINZ])
 			bounds[MAP_MAXZ] = max(bounds[MAP_MAXZ], M.bounds[MAP_MAXZ])
+			all_turfs_to_initialise += M.turfs_to_initialise
+			all_objs_to_initialise += M.objs_to_initialise
+			all_mobs_to_initialise += M.mobs_to_initialise
 			areas_mentioned |= M.areas_mentioned
 		z_offset = bounds[MAP_MAXZ] + 1
 
 	var/datum/map_load_metadata/M = new
-	M.atoms_to_initialise = all_atoms_to_initialise
 	M.bounds = bounds
+	M.turfs_to_initialise = all_turfs_to_initialise
+	M.objs_to_initialise = all_objs_to_initialise
+	M.mobs_to_initialise = all_mobs_to_initialise
 	M.areas_mentioned = areas_mentioned
 	return M
 
@@ -94,7 +102,9 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 	var/stored_index = 1
 
-	var/list/atoms_to_initialise = list()
+	var/list/turfs_to_initialise = list()
+	var/list/objs_to_initialise = list()
+	var/list/mobs_to_initialise = list()
 	var/list/atoms_to_delete = list()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 
@@ -210,7 +220,9 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 										throw EXCEPTION("Undefined model key in DMM.")
 									var/datum/grid_load_metadata/M = parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion, clear_contents)
 									if (M)
-										atoms_to_initialise += M.atoms_to_initialise
+										turfs_to_initialise += M.turfs_to_initialise
+										objs_to_initialise += M.objs_to_initialise
+										mobs_to_initialise += M.mobs_to_initialise
 										atoms_to_delete += M.atoms_to_delete
 								#ifdef TESTING
 								else
@@ -231,17 +243,14 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		return null
 	else
 		if(!measureOnly)
-			if(!no_changeturf)
-				for(var/t in block(locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]), locate(bounds[MAP_MAXX], bounds[MAP_MAXY], bounds[MAP_MAXZ])))
-					var/turf/T = t
-					//we do this after we load everything in. if we don't; we'll have weird atmos bugs regarding atmos adjacent turfs
-					T.post_change()
 			if(clear_contents)
 				for(var/atom/to_delete in atoms_to_delete)
 					qdel(to_delete)
 		var/datum/map_load_metadata/M = new
 		M.bounds = bounds
-		M.atoms_to_initialise = atoms_to_initialise
+		M.turfs_to_initialise = turfs_to_initialise
+		M.objs_to_initialise = objs_to_initialise
+		M.mobs_to_initialise = mobs_to_initialise
 		M.areas_mentioned = areas_mentioned
 		return M
 
@@ -264,7 +273,9 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
  */
 
 /datum/grid_load_metadata
-	var/list/atoms_to_initialise
+	var/list/turfs_to_initialise
+	var/list/objs_to_initialise
+	var/list/mobs_to_initialise
 	var/list/atoms_to_delete
 
 /dmm_suite/proc/types_to_delete()
@@ -330,14 +341,16 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	//turn off base new Initialization until the whole thing is loaded
 	SSatoms.map_loader_begin()
 	//since we've switched off autoinitialisation, record atoms to initialise later
-	var/list/atoms_to_initialise = list()
+	var/list/turfs_to_initialise = list()
+	var/list/objs_to_initialise = list()
+	var/list/mobs_to_initialise = list()
 
 	//instanciate the first /turf
 	var/turf/T
 	if(members[first_turf_index] != /turf/template_noop)
 		is_not_noop = TRUE
 		T = instance_atom(members[first_turf_index],members_attributes[first_turf_index],crds,no_changeturf)
-		atoms_to_initialise += T
+		turfs_to_initialise += T
 
 	if(T)
 		//if others /turf are presents, simulates the underlays piling effect
@@ -347,6 +360,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			T = instance_atom(members[index],members_attributes[index],crds,no_changeturf)//instance new turf
 			T.underlays += underlay
 			index++
+			turfs_to_initialise += T
 
 	if (clear_contents && is_not_noop)
 		for (var/type_to_delete in types_to_delete())
@@ -356,12 +370,18 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 	//finally instance all remainings objects/mobs
 	for(index in 1 to first_turf_index-1)
-		atoms_to_initialise += instance_atom(members[index],members_attributes[index],crds,no_changeturf)
+		var/atom/A = instance_atom(members[index],members_attributes[index],crds,no_changeturf)
+		if (istype(A, /obj))
+			objs_to_initialise += A
+		else if (istype(A, /mob))
+			mobs_to_initialise += A
 	//Restore initialization to the previous valsue
 	SSatoms.map_loader_stop()
 
 	var/datum/grid_load_metadata/M = new
-	M.atoms_to_initialise = atoms_to_initialise
+	M.turfs_to_initialise = turfs_to_initialise
+	M.objs_to_initialise = objs_to_initialise
+	M.mobs_to_initialise = mobs_to_initialise
 	M.atoms_to_delete = atoms_to_delete
 	return M
 
@@ -377,7 +397,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		result.members = cached[1]
 		result.members_attributes = cached[2]
 		return result
-	
+
 	/////////////////////////////////////////////////////////
 	//Constructing members and corresponding variables lists
 	////////////////////////////////////////////////////////
@@ -399,7 +419,13 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		old_position = dpos + 1
 
 		if(!atom_def) // Skip the item if the path does not exist.  Fix your crap, mappers!
-			continue
+#ifdef UNIT_TEST
+			log_error("Couldn't find atom path specified in map: [full_def]")
+#endif
+			if (dpos == 0)
+				break
+			else
+				continue
 
 		members += atom_def
 
