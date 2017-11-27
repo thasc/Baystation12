@@ -133,7 +133,7 @@
 		/area/map_template,
 		/area/marooned,
 		/area/mine,
-		/area/ship/scrap,
+		/area/ship,
 		/area/smugglers,
 		/area/syndicate_mothership
 	)
