@@ -42,7 +42,7 @@
 	area_coherency_test_subarea_count = list(
 		/area/constructionsite = 7,
 		/area/constructionsite/maintenance = 14,
-		/area/solar/constructionsite = 3,
+		/area/constructionsite/solar = 3,
 	)
 
 	area_usage_test_exempted_areas = list(

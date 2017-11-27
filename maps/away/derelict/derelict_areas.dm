@@ -47,7 +47,7 @@
 	name = "Construction Site Teleporter"
 	icon_state = "yellow"
 
-/area/solar/constructionsite
+/area/constructionsite/solar
 	name = "\improper Construction Site Solars"
 	icon_state = "aft"
 
