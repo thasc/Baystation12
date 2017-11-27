@@ -29,6 +29,10 @@
 	return M
 
 /datum/map_template/proc/init_atoms(var/list/turfs, var/list/objs, var/list/mobs)
+
+	if (SSatoms.initialized == INITIALIZATION_INSSATOMS)
+		return // let proper initialisation handle it later
+
 	var/list/obj/machinery/atmospherics/atmos_machines = list()
 	var/list/obj/machinery/machines = list()
 	var/list/obj/structure/cable/cables = list()
@@ -45,19 +49,14 @@
 	SSatoms.InitializeAtoms(objs)
 	SSatoms.InitializeAtoms(turfs)
 
-	// note: if we're loading this template during round start, the above may not ACTUALLY be init'd
-	// i.e. if SSatoms.initialized == INITIALIZATION_INSSATOMS
-	// so be careful!
-
 	SSmachines.setup_powernets_for_cables(cables)
 	SSmachines.setup_atmos_machinery(atmos_machines)
 
 	for (var/obj/machinery/machine in machines)
 		machine.power_change()
 
-	if (SSatoms.initialized != INITIALIZATION_INSSATOMS) // let Initialize handle 'post_change-esque' stuff otherwise
-		for (var/turf/T in turfs)
-			T.post_change()
+	for (var/turf/T in turfs)
+		T.post_change()
 
 /datum/map_template/proc/init_shuttles()
 	for (var/shuttle_type in shuttles_to_initialise)
