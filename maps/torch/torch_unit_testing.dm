@@ -123,14 +123,15 @@
 		/area/turbolift/seconddeck,
 		/area/turbolift/thirddeck,
 		/area/turbolift/fourthdeck,
-		/area/exoplanet,
-		/area/exoplanet/desert,
-		/area/exoplanet/grass,
-		/area/exoplanet/snow,
-		/area/exoplanet/garbage,
 		/area/template_noop,
+	)
+
+	area_usage_test_exempted_root_areas = list(
+		/area/constructionsite,
+		/area/exoplanet,
 		/area/map_template,
-		/area/map_template/little_house
+		/area/ship/scrap,
+		/area/syndicate_mothership
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber
