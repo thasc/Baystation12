@@ -4,7 +4,6 @@
 	var/height = 0
 	var/tallness = 0
 	var/list/mappaths = null
-	var/list/areas_mentioned = list()
 	var/loaded = 0 // Times loaded this round
 	var/allow_duplicates = TRUE
 	var/list/shuttles_to_initialise = list()
@@ -25,7 +24,6 @@
 		width = M.bounds[MAP_MAXX] - M.bounds[MAP_MINX] + 1
 		height = M.bounds[MAP_MAXY] - M.bounds[MAP_MINX] + 1
 		tallness = M.bounds[MAP_MAXZ] - M.bounds[MAP_MINZ] + 1
-		areas_mentioned = M.areas_mentioned
 	return M
 
 /datum/map_template/proc/init_atoms(var/list/turfs, var/list/objs, var/list/mobs)

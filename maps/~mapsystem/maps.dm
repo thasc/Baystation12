@@ -182,11 +182,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		if (selected_site.load_new_z())
 			report_progress("Loaded away site [selected_site]!")
 			away_site_budget -= selected_site.cost
-#ifdef UNIT_TEST
-	// tough luck, remainder - you're unused, so exempt you from tests
-	for (var/datum/map_template/site in sites_by_spawn_weight)
-		GLOB.using_map.area_usage_test_exempted_areas |= site.areas_mentioned
-#endif
 	report_progress("Finished loading away sites, remaining budget [away_site_budget], remaining sites [sites_by_spawn_weight.len]")
 
 /datum/map/proc/build_exoplanets()

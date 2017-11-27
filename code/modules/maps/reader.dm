@@ -11,7 +11,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	var/list/turfs_to_initialise
 	var/list/objs_to_initialise
 	var/list/mobs_to_initialise
-	var/list/areas_mentioned
 
 /dmm_suite
 		// /"([a-zA-Z]+)" = \(((?:.|\n)*?)\)\n(?!\t)|\((\d+),(\d+),(\d+)\) = \{"([a-zA-Z\n]*)"\}/g
@@ -70,7 +69,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	var/list/all_turfs_to_initialise = list()
 	var/list/all_objs_to_initialise = list()
 	var/list/all_mobs_to_initialise = list()
-	var/list/areas_mentioned = list()
 
 	for (var/tfile in tfiles)
 		var/datum/map_load_metadata/M = load_map_zlevel(tfile, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower, x_upper, y_lower, y_upper)
@@ -84,7 +82,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			all_turfs_to_initialise += M.turfs_to_initialise
 			all_objs_to_initialise += M.objs_to_initialise
 			all_mobs_to_initialise += M.mobs_to_initialise
-			areas_mentioned |= M.areas_mentioned
 		z_offset = bounds[MAP_MAXZ] + 1
 
 	var/datum/map_load_metadata/M = new
@@ -92,7 +89,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	M.turfs_to_initialise = all_turfs_to_initialise
 	M.objs_to_initialise = all_objs_to_initialise
 	M.mobs_to_initialise = all_mobs_to_initialise
-	M.areas_mentioned = areas_mentioned
 	return M
 
 /dmm_suite/proc/load_map_zlevel(var/tfile, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower, x_upper, y_lower, y_upper)
@@ -107,8 +103,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	var/list/mobs_to_initialise = list()
 	var/list/atoms_to_delete = list()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
-
-	var/list/areas_mentioned = list()
 
 	while(dmmRegex.Find(tfile, stored_index))
 		stored_index = dmmRegex.next
@@ -126,12 +120,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 					throw EXCEPTION("Inconsistant key length in DMM")
 			if(!measureOnly)
 				grid_models[key] = model
-			var/datum/model_data/D = parse_model(model, key, no_changeturf)
-			if (D)
-				for (var/member in D.members)
-					while (ispath(member, /area) && member != /area)
-						areas_mentioned |= member
-						member = PARENT(member)
 
 		// (1,1,1) = {"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
 		else if(dmmRegex.group[3]) // Coords
@@ -251,7 +239,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		M.turfs_to_initialise = turfs_to_initialise
 		M.objs_to_initialise = objs_to_initialise
 		M.mobs_to_initialise = mobs_to_initialise
-		M.areas_mentioned = areas_mentioned
 		return M
 
 /**
