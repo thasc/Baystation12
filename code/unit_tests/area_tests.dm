@@ -77,13 +77,11 @@
 
 /datum/unit_test/areas_shall_be_used/start_test()
 	var/unused_areas = 0
-AREA_LOOP:
 	for(var/area_type in subtypesof(/area))
 		if(area_type in GLOB.using_map.area_usage_test_exempted_areas)
 			continue
-		for(var/parent_type in GLOB.using_map.area_usage_test_exempted_root_areas)
-			if(ispath(area_type, parent_type))
-				continue AREA_LOOP
+		if(is_child_of_any_exempted_parents(area_type))
+			continue
 		var/area/located_area = locate(area_type)
 		if(located_area && !located_area.z)
 			log_bad("[log_info_line(located_area)] is unused.")
@@ -94,3 +92,9 @@ AREA_LOOP:
 	else
 		pass("All areas are used.")
 	return 1
+
+/datum/unit_test/areas_shall_be_used/proc/is_child_of_any_exempted_parents(var/area_type)
+	for(var/parent_type in GLOB.using_map.area_usage_test_exempted_root_areas)
+		if(ispath(area_type, parent_type))
+			return TRUE
+	return FALSE
