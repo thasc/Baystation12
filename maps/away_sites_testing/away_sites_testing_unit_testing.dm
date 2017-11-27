@@ -11,7 +11,6 @@
 		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/outpost/abandoned = NO_SCRUBBER,
-		/area/solar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/ship/scrap/maintenance/engine/port = NO_SCRUBBER|NO_VENT,
 		/area/ship/scrap/maintenance/engine/starboard = NO_SCRUBBER|NO_VENT,
