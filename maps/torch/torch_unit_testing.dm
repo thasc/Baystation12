@@ -110,6 +110,7 @@
 	area_usage_test_exempted_areas = list(
 		/area/AIsattele,
 		/area/djstation,
+		/area/outpost,
 		/area/outpost/abandoned,
 		/area/overmap,
 		/area/shuttle/escape/centcom,
