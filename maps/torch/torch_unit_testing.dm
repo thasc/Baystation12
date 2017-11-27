@@ -129,8 +129,11 @@
 	area_usage_test_exempted_root_areas = list(
 		/area/constructionsite,
 		/area/exoplanet,
+		/area/lost_supply_base,
 		/area/map_template,
+		/area/marooned,
 		/area/ship/scrap,
+		/area/smugglers,
 		/area/syndicate_mothership
 	)
 

@@ -84,7 +84,6 @@
 	)
 
 	area_usage_test_exempted_root_areas = list(
-		/area/constructionsite,
 		/area/exoplanet,
 		/area/map_template
 	)
