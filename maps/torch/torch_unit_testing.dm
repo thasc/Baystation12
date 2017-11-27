@@ -108,10 +108,12 @@
 	)
 
 	area_usage_test_exempted_areas = list(
+		/area/AIsattele,
+		/area/djstation,
+		/area/outpost/abandoned,
 		/area/overmap,
 		/area/shuttle/escape/centcom,
 		/area/shuttle/escape,
-		/area/turbolift,
 		/area/security/prison,
 		/area/shuttle/syndicate_elite/station,
 		/area/shuttle/escape/centcom,
@@ -128,6 +130,7 @@
 
 	area_usage_test_exempted_root_areas = list(
 		/area/constructionsite,
+		/area/derelict,
 		/area/exoplanet,
 		/area/lost_supply_base,
 		/area/map_template,
