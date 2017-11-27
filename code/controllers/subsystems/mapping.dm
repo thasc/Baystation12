@@ -11,7 +11,11 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 	preloadTemplates()
+#ifdef UNIT_TEST
+	log_debug("Bypassing normal away site generation...")
+#else
 	GLOB.using_map.build_away_sites()
+#endif
 	..()
 
 /datum/controller/subsystem/mapping/Recover()
@@ -37,7 +41,7 @@ SUBSYSTEM_DEF(mapping)
 	if (!banned_exoplanet_dmms || !banned_space_dmms || !banned_away_site_dmms)
 		report_progress("One or more map blacklist files are not present in the config directory!")
 
-	var/list/banned_maps = banned_exoplanet_dmms + banned_space_dmms + banned_away_site_dmms
+	var/list/banned_maps = list() + banned_exoplanet_dmms + banned_space_dmms + banned_away_site_dmms
 
 	for(var/item in sortList(subtypesof(/datum/map_template/ruin), /proc/cmp_ruincost_priority))
 		var/datum/map_template/ruin/ruin_type = item
