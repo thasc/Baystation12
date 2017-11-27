@@ -26,7 +26,7 @@
 		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT,
 		/area/marooned/marooned_snow = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/marooned/marooned_hut = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/lost_supply_base_solar = NO_SCRUBBER,
+		/area/lost_supply_base/solar = NO_SCRUBBER,
 		/area/smugglers/base = NO_SCRUBBER,
 		/area/smugglers/dorms = NO_SCRUBBER|NO_VENT,
 		/area/smugglers/office = NO_SCRUBBER|NO_VENT
@@ -37,7 +37,6 @@
 		/area/mine/explored,
 		/area/mine/unexplored,
 		/area/marooned/marooned_snow
-
 	)
 
 	area_coherency_test_subarea_count = list(
@@ -49,8 +48,6 @@
 	area_usage_test_exempted_areas = list(
 		/area/overmap,
 		/area/template_noop,
-		/area/map_template,
-		/area/map_template/little_house,
 		/area/centcom,
 		/area/centcom/holding,
 		/area/centcom/specops,
@@ -83,11 +80,11 @@
 		/area/syndicate_mothership/elite_squad,
 		/area/wizard_station,
 		/area/beach,
-		/area/exoplanet,
-		/area/exoplanet/desert,
-		/area/exoplanet/garbage,
-		/area/exoplanet/grass,
-		/area/exoplanet/snow,
-		/area/exoplanet/desert,
 		/area/turbolift
+	)
+
+	area_usage_test_exempted_root_areas = list(
+		/area/constructionsite,
+		/area/exoplanet,
+		/area/map_template
 	)
