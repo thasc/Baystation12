@@ -14,6 +14,12 @@
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rockvault"
 
+/turf/unsimulated/chasm_mask
+	name = "chasm mask"
+	icon = 'icons/turf/walls.dmi'
+	icon_state = "alienvault"
+	temperature = TCMB
+
 /turf/unsimulated/floor/rescue_base
 	icon_state = "asteroidfloor"
 

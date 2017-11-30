@@ -35,6 +35,9 @@
 
 	var/turf/below
 
+/turf/simulated/open/airless
+	initial_gas = null
+
 /turf/simulated/open/post_change()
 	..()
 	update()
