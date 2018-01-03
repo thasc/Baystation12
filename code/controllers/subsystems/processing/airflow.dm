@@ -151,3 +151,8 @@ PROCESSING_SUBSYSTEM_DEF(airflow)
 	airflow_dest = null
 
 	SSairflow.processing += src
+
+/atom/movable/Destroy()
+	SSairflow.processing -= src
+	SSairflow.current_run -= src
+	return ..()
