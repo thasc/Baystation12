@@ -87,6 +87,10 @@
 			var/extra_links = receiver.get_ghost_follow_link(communicator,"","\[","\]")
 			if(extra_links)
 				message = "[extra_links] [message]"
+		if(flags & COMMUNICATION_FLAGGABLE)
+			var/extra_links = receiver.get_flag_message_link(communicator,"","\[","\]")
+			if(extra_links)
+				message = "[extra_links] [message]"
 		do_receive_communication(arglist(args))
 
 /decl/communication_channel/proc/can_receive_communication(var/datum/receiver)

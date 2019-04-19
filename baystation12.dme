@@ -249,6 +249,7 @@
 #include "code\datums\communication\aooc.dm"
 #include "code\datums\communication\channel.dm"
 #include "code\datums\communication\dsay.dm"
+#include "code\datums\communication\flagging.dm"
 #include "code\datums\communication\looc.dm"
 #include "code\datums\communication\ooc.dm"
 #include "code\datums\communication\pray.dm"
