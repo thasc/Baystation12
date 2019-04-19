@@ -96,10 +96,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 			var/atom/target = locate(href_list["track"])
 			if(istype(target))
 				ManualFollow(target)
-	if (href_list["flagmessagetarget"])
+	if (href_list["flagmessageid"])
 		var/confirmed = alert(usr, "Are you sure you want to flag this message?", "Flag message", "No", "Yes") == "Yes"
 		if (confirmed)
-			SSmessage_flagging.flag(usr, "someone", "some message")
+			SSmessage_flagging.flag(usr, href_list["flagmessageid"]) // TODO: is this safe?
 
 /*
 Transfer_mind is there to check if mob is being deleted/not going to have a body.

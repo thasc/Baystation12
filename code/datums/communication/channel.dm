@@ -88,7 +88,8 @@
 			if(extra_links)
 				message = "[extra_links] [message]"
 		if(flags & COMMUNICATION_FLAGGABLE)
-			var/extra_links = receiver.get_flag_message_link(communicator,"","\[","\]")
+			var/message_id = SSmessage_flagging.cache_message(message)
+			var/extra_links = receiver.get_flag_message_link(message_id, communicator,"","\[","\]")
 			if(extra_links)
 				message = "[extra_links] [message]"
 		do_receive_communication(arglist(args))
