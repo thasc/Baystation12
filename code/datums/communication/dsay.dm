@@ -5,7 +5,7 @@
 	name = "DSAY"
 	config_setting = "dsay_allowed"
 	expected_communicator_type = /client
-	flags = COMMUNICATION_LOG_CHANNEL_NAME
+	flags = COMMUNICATION_LOG_CHANNEL_NAME | COMMUNICATION_FLAGGABLE
 	log_proc = /proc/log_say
 	mute_setting = MUTE_DEADCHAT
 	show_preference_setting = /datum/client_preference/show_dsay
